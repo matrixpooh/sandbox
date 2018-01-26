@@ -79,7 +79,7 @@ public class GraphTest {
 		Iterator<MethodOrMethodContext> targets = new Targets(cg.edgesInto(m));
 		while (targets.hasNext()) {
 			SootMethod tgt = (SootMethod) targets.next();
-			log.info("printPossibleCallees::"+ m + " may call " + tgt);
+			log.debug("printPossibleCallees::"+ m + " may call " + tgt);
 		}		
 	}
 }

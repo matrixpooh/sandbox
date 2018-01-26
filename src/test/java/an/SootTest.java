@@ -51,7 +51,7 @@ public class SootTest {
 		//Fetch the call graph
 		CallGraph cg = soot.Scene.v().getCallGraph();
 		if (cg.toString().contains(SootTest.class.getPackage().getName()))
-			log.info(cg.toString());
+			log.debug(cg.toString());
 	
 	}
 	
@@ -74,7 +74,7 @@ public class SootTest {
 	}
 	
 	static void setSparkPointsToAnalysis() {
-		log.info("[spark] Starting analysis ...");
+		log.debug("[spark] Starting analysis ...");
 				
 		HashMap<String, String> opt = new HashMap<String, String>();
 		opt.put("enabled","true");
@@ -110,7 +110,7 @@ public class SootTest {
 		
 		SparkTransformer.v().transform("",opt);
 		
-		log.info("[spark] Done!");
+		log.debug("[spark] Done!");
 	}
 	
 	private static int getLineNumber(Stmt s) {
@@ -139,7 +139,7 @@ public class SootTest {
 		Iterator<SootMethod> mi = sc.getMethods().iterator();
 		while (mi.hasNext()) {
 			SootMethod sm = (SootMethod)mi.next();
-			log.info("getLocals::soot method name:" + sm.getName());
+			log.debug("getLocals::soot method name:" + sm.getName());
 			if (true && sm.getName().equals(methodname) && sm.isConcrete()) {
 				JimpleBody jb = (JimpleBody)sm.retrieveActiveBody();
 				Iterator<Unit> ui = jb.getUnits().iterator();
@@ -178,7 +178,7 @@ public class SootTest {
 				Local l2 = (Local)e2.getValue();
 				PointsToSet r2 = pta.reachingObjects(l2);	
 				if (p1<=p2)
-					log.info("["+p1+","+p2+"]\t Container intersect? "+r1.hasNonEmptyIntersection(r2));
+					log.debug("["+p1+","+p2+"]\t Container intersect? "+r1.hasNonEmptyIntersection(r2));
 			}
 		}
 	}
@@ -198,7 +198,7 @@ public class SootTest {
 				Local l2 = (Local)e2.getValue();
 				PointsToSet r2 = pta.reachingObjects(l2,f);	
 				if (p1<=p2)
-					log.info("["+p1+","+p2+"]\t Container.item intersect? "+r1.hasNonEmptyIntersection(r2));
+					log.debug("["+p1+","+p2+"]\t Container.item intersect? "+r1.hasNonEmptyIntersection(r2));
 			}
 		}
 	}

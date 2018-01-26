@@ -23,6 +23,7 @@ import soot.jimple.JimpleBody;
 import soot.jimple.Stmt;
 import soot.jimple.spark.SparkTransformer;
 import soot.jimple.toolkits.callgraph.CallGraph;
+import soot.jimple.toolkits.callgraph.Edge;
 import soot.tagkit.LineNumberTag;
 import soot.tagkit.Tag;
 
@@ -50,9 +51,11 @@ public class SootTest {
 	
 		//Fetch the call graph
 		CallGraph cg = soot.Scene.v().getCallGraph();
-		if (cg.toString().contains(SootTest.class.getPackage().getName()))
-			log.debug(cg.toString());
-	
+		for (Edge edge : cg) {
+			if (edge.tgt().getSignature().contains("dk.brics.paddle."))
+				log.debug("Source:" + edge.src().getSignature() + "; Target:" + edge.tgt().getSignature());
+			
+		}
 	}
 	
 	// Make sure we get line numbers and whole program analysis
@@ -74,7 +77,7 @@ public class SootTest {
 	}
 	
 	static void setSparkPointsToAnalysis() {
-		log.debug("[spark] Starting analysis ...");
+		log.info("[spark] Starting analysis ...");
 				
 		HashMap<String, String> opt = new HashMap<String, String>();
 		opt.put("enabled","true");
@@ -110,7 +113,7 @@ public class SootTest {
 		
 		SparkTransformer.v().transform("",opt);
 		
-		log.debug("[spark] Done!");
+		log.info("[spark] Done!");
 	}
 	
 	private static int getLineNumber(Stmt s) {

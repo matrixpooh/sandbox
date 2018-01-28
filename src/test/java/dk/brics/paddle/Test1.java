@@ -1,7 +1,12 @@
 package dk.brics.paddle;
 public class Test1 {
 	
+	static int DUMMY=3;
+	
 	public void go() {
+	
+		DUMMY++;
+		
 		Container c1 = new Container();
 		Item i1 = new Item();
 		c1.setItem(i1);
@@ -14,6 +19,7 @@ public class Test1 {
 	}
 	
 	public static void main(String args[]) {
+		DUMMY--;
 		new Test1().go();
 	}
 
